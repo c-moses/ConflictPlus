@@ -1,0 +1,842 @@
+$grp GenericEntity : "{0DDAFCA92FF4451C}Prefabs/Systems/AmbientVehicles/AmbientVehicleSpawnpoint_CIV.et" {
+ {
+  coords 9325.038 10.156 5027.612
+  angleY 118.144
+ }
+ {
+  coords 9351.273 3.727 5080.976
+  angleY -173.869
+ }
+ {
+  coords 8360.663 238.092 4774.955
+  angleY 115.585
+ }
+ {
+  coords 8247.768 221.273 4358.915
+  angleY -161.897
+ }
+ {
+  coords 8135.928 202.406 3893.378
+  angleY 39.454
+ }
+ {
+  coords 8477.391 153.375 3635.691
+  angleY 133.54
+ }
+ {
+  coords 8453.573 132.899 3375.541
+  angleY -41.136
+ }
+ {
+  coords 8780.061 129.738 3237.245
+  angleY 164.876
+ }
+ {
+  coords 8770.985 100.973 2839.379
+  angleY 70.026
+ }
+ {
+  coords 8826.297 95.119 2767.317
+  angleY -111.732
+ }
+ {
+  coords 8849.804 94.168 2647.354
+  angleY 59.369
+ }
+ {
+  coords 8665.564 119.867 2719.289
+  angleY 128.439
+ }
+ {
+  coords 8802.577 138.177 3317.072
+  angleY 146.293
+ }
+ {
+  coords 9349.147 250.031 3269.28
+  angleY 52.099
+ }
+ {
+  coords 9355.135 250.031 3264.617
+  angleY 50.864
+ }
+ {
+  coords 9189.855 64.056 2084.635
+  angleY 101.202
+ }
+ {
+  coords 9273.37 55.009 2040.535
+  angleY 54.261
+ }
+ {
+  coords 9437.257 44.074 1669.34
+  angleY 140.743
+ }
+ {
+  coords 9588.794 23.382 1589.856
+  angleY 131.645
+ }
+ {
+  coords 9656.328 20.742 1651.584
+  angleY -81.601
+ }
+ {
+  coords 9651.056 13.844 1524.125
+  angleY 47.211
+ }
+ {
+  coords 9656.105 13.844 1518.77
+  angleY 47.64
+ }
+ {
+  coords 9628.933 23.818 1439.655
+  angleY -36.246
+ }
+ {
+  coords 9782.32 5.573 1393.842
+  angleY 67.548
+ }
+ {
+  coords 9827.314 4.937 1363.2
+  angleY -113.809
+ }
+ {
+  coords 9830.108 4.937 1343.474
+  angleY 60.543
+ }
+ {
+  coords 9871.504 3.128 1535.026
+  angleY 13.519
+ }
+ {
+  coords 10104.842 9.871 1622.279
+  angleY -84.758
+ }
+}
+$grp GenericEntity : "{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMilitaryBase.et" {
+ MOB_Argent {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bCanBeHQ 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 6700
+     }
+    }
+    m_bIsSource 1
+   }
+  }
+  coords 10837.482 7.882 8723.154
+  angleY -81.963
+ }
+ MOB_Saules {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bCanBeHQ 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 6000
+     }
+    }
+    m_bIsSource 1
+   }
+  }
+  coords 3218.896 1.106 2149.204
+  angleY -72.079
+  {
+   GenericEntity : "{13A99500A14FA14C}Prefabs/Props/Military/SupplyBox/SupplyShippingContainers/SupplyShippingContainers_01/SupplyShippingContainers_01_20ft.et" {
+    coords -12.897 -0.284 -10.088
+    angleX 2.523
+    angleY 31.441
+    angleZ 0.192
+   }
+   $grp GenericEntity : "{190CC54D175F52CB}Prefabs/Props/Military/SupplyBox/SupplyShippingContainers/SupplyShippingContainers_01/SupplyShippingContainers_01_10ft.et" {
+    {
+     coords 8.923 -0.044 8.364
+     angleY 91.827
+    }
+    {
+     coords -8.443 -0.279 -9.953
+     angleX 2.31
+     angleY 21.636
+     angleZ 4.22
+    }
+   }
+  }
+ }
+ Obj_StubwoodPoint {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 6539.293 2.278 2315.89
+  angleY 38.079
+  {
+   GenericEntity : "{3DFA7F32B1C56399}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V3_storage_FIA_covered.et" {
+    coords -5.913 0.613 12.346
+    angleY -37.269
+    {
+     GenericEntity {
+      ID "5D30E783A6282BD7"
+      coords 0 -0 0
+      angleX 2.64
+      angleY 0.126
+      angleZ 2.724
+     }
+    }
+   }
+   GenericEntity : "{7D2C0FB3B8ACF2B0}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_Large_01/SupplyStack_Large_01_storage_FIA_covered.et" {
+    coords -5.299 0.562 11.073
+    angleX 2.678
+    angleY -37.953
+    angleZ 2.687
+   }
+   GenericEntity : "{EF62478046B376DD}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V2_storage_FIA_covered.et" {
+    coords -6.848 0.665 11.195
+    angleX 2.678
+    angleY -37.953
+    angleZ 2.687
+   }
+  }
+ }
+ ObjMain_Regina {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 7175.177 137.321 2357.137
+  angleY 91.836
+ }
+ ObjMain_Perelle {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 9333.576 4.244 5069.19
+  angleY 166.111
+ }
+ Obj_SkuaPoint {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 9605.062 1.167 5469.06
+  angleY -20.246
+  {
+   GenericEntity : "{3DFA7F32B1C56399}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V3_storage_FIA_covered.et" {
+    coords -3.076 -0.066 9.855
+    angleY 20.246
+    angleZ 1.79
+   }
+   GenericEntity : "{7D2C0FB3B8ACF2B0}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_Large_01/SupplyStack_Large_01_storage_FIA_covered.et" {
+    coords -4.52 -0.015 9.835
+    angleY 20.246
+    angleZ 2.684
+   }
+   GenericEntity : "{EF62478046B376DD}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V2_storage_FIA_covered.et" {
+    coords -3.516 -0.066 8.667
+    angleY 20.246
+    angleZ 1.79
+   }
+  }
+ }
+ Obj_PanoramaLodge {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 8243.105 224.125 2180.717
+  angleY -147.814
+ }
+ ObjMain_HornikLodge {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 9909.601 296.813 2608.213
+  angleY 163.67
+ }
+ Obj_MonfortCastle {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 9339.813 196.641 1145.23
+  angleY 171.21
+ }
+ Obj_MargretsMount {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 9458.908 326.897 3880.441
+  angleY 72.399
+ }
+ Obj_Vernon {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 9259.639 57.323 2058.505
+  angleY 50.62
+ }
+ ObjMain_SaintPierre {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 9991.546 2.463 1561.645
+  angleY -164.907
+ }
+ Obj_Cascades {
+  coords 10228.916 7.494 3279.783
+  angleY 103.921
+  {
+   GenericEntity : "{3DFA7F32B1C56399}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V3_storage_FIA_covered.et" {
+    coords 8.76 0.757 -11.196
+    angleX 1.786
+    angleY -103.837
+    angleZ 2.685
+   }
+   GenericEntity : "{7D2C0FB3B8ACF2B0}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_Large_01/SupplyStack_Large_01_storage_FIA_covered.et" {
+    coords 7.509 0.851 -11.953
+    angleX 2.673
+    angleY -103.754
+    angleZ 3.58
+   }
+   GenericEntity : "{EF62478046B376DD}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V2_storage_FIA_covered.et" {
+    coords 8.984 0.828 -12.539
+    angleX 3.569
+    angleY -103.754
+    angleZ 2.689
+   }
+  }
+ }
+ Obj_LeBosc {
+  coords 7938.754 12.169 1461.653
+  angleY 35.464
+ }
+ ObjMain_Courbet {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 8425.984 12.478 789.714
+  angleY -124.376
+  {
+   GenericEntity : "{3DFA7F32B1C56399}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V3_storage_FIA_covered.et" {
+    coords 18.255 0.486 14.521
+    angleY 33.734
+   }
+   GenericEntity : "{7D2C0FB3B8ACF2B0}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_Large_01/SupplyStack_Large_01_storage_FIA_covered.et" {
+    coords 17.974 0.474 13.237
+    angleY 124.376
+   }
+   GenericEntity : "{EF62478046B376DD}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V2_storage_FIA_covered.et" {
+    coords 16.883 0.491 13.847
+    angleY 124.376
+   }
+  }
+ }
+ ObjMain_Lancre {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+    m_bDisableWhenUnusedAsHQ 0
+   }
+  }
+  coords 11641.716 6.245 2162.114
+  angleY 107.005
+ }
+ Obj_OreRidge {
+  coords 10673.095 148.671 2344.435
+  angleY -81.985
+ }
+}
+GenericEntity : "{13A99500A14FA14C}Prefabs/Props/Military/SupplyBox/SupplyShippingContainers/SupplyShippingContainers_01/SupplyShippingContainers_01_20ft.et" {
+ coords 10827.397 5.455 8729.694
+ angleX 13.064
+ angleY 107.026
+ angleZ -0.594
+}
+$grp GenericEntity : "{190CC54D175F52CB}Prefabs/Props/Military/SupplyBox/SupplyShippingContainers/SupplyShippingContainers_01/SupplyShippingContainers_01_10ft.et" {
+ {
+  coords 10839.289 7.977 8733.875
+  angleX -8.698
+  angleY -86.39
+  angleZ -3.203
+ }
+ {
+  coords 10831.361 9.036 8711.523
+  angleX -5.335
+  angleY 0.334
+  angleZ -3.592
+ }
+}
+$grp GenericEntity : "{27941CDF3E7E1A5F}Prefabs/MP/Campaign/CampaignRemnantsSupplyDepot.et" {
+ Supplies_Lancre {
+  components {
+   SCR_CampaignSuppliesComponent "{59F288D533FE66DD}" {
+    m_fOperationalRadius 50
+   }
+  }
+  coords 11551.688 14.375 1490.882
+  {
+   GenericEntity : "{38464762C5D374D2}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_01_Campaign.et" {
+    coords 17.023 -0.28 -12.145
+    angleX 1.349
+    angleY 24.195
+    angleZ 3.545
+   }
+   GenericEntity : "{47789BA6E9CA2928}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_03_Campaign.et" {
+    coords 4.556 0.062 1.271
+    angleY -179.031
+   }
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords 53.269 -1.324 -27.417
+    angleX -12.549
+    angleY -143.737
+    angleZ -3.708
+   }
+  }
+ }
+ Supplies_Castle {
+  components {
+   SCR_CampaignSuppliesComponent "{59F288D533FE66DD}" {
+    m_fOperationalRadius 50
+   }
+  }
+  coords 9848.818 6.612 256.389
+  {
+   GenericEntity : "{38464762C5D374D2}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_01_Campaign.et" {
+    coords 41.391 3.175 12.595
+    angleX 7.47
+    angleY 41.745
+    angleZ -1.681
+   }
+   GenericEntity : "{47789BA6E9CA2928}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_03_Campaign.et" {
+    coords -0.072 0.011 0.767
+    angleY 28.864
+   }
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords 69.52 3.157 -0.308
+    angleX 6.236
+    angleY -0.196
+    angleZ -1.801
+   }
+  }
+ }
+ Supplies_Durras {
+  components {
+   SCR_CampaignSuppliesComponent "{59F288D533FE66DD}" {
+    m_fOperationalRadius 50
+   }
+  }
+  coords 8779.881 95.56 2755.839
+  {
+   GenericEntity : "{38464762C5D374D2}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_01_Campaign.et" {
+    coords -5.429 1.128 -10.93
+    angleX -6.146
+    angleY -0.771
+    angleZ 7.166
+   }
+   GenericEntity : "{47789BA6E9CA2928}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_03_Campaign.et" {
+    coords -1.008 0.002 3.958
+    angleY 69.382
+   }
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords 43.584 -0.299 21.008
+    angleX 1.061
+    angleY -110.238
+    angleZ -2.298
+   }
+  }
+ }
+ Supplies_SkuaPoint {
+  coords 9593.104 10.875 5214.263
+  {
+   GenericEntity : "{38464762C5D374D2}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_01_Campaign.et" {
+    coords 11.866 0 -1.271
+    angleY -77.441
+   }
+   GenericEntity : "{47789BA6E9CA2928}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_03_Campaign.et" {
+    coords -0.187 0 -6.468
+   }
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords -18.149 0 -7.228
+   }
+  }
+ }
+ Supplies_Regina {
+  coords 7077.888 156.813 2080.298
+  {
+   GenericEntity : "{38464762C5D374D2}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_01_Campaign.et" {
+    coords 7.091 -0.078 4.778
+    angleX 0.027
+    angleY -178.257
+    angleZ -0.895
+   }
+   GenericEntity : "{47789BA6E9CA2928}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_03_Campaign.et" {
+    coords 7.623 -0.116 -10.373
+    angleX -0.415
+    angleY -25.844
+    angleZ 1.196
+   }
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords -5.191 0.077 9.817
+    angleX -1.668
+    angleY 173.001
+    angleZ 1.106
+   }
+  }
+ }
+}
+$grp GenericEntity : "{9273AB931008C271}Prefabs/Systems/AmbientPatrol/AmbientPatrolSpawnpoint_FIA.et" {
+ {
+  coords 11634.016 12.268 1453.596
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 73.262 -8.007 -48.471
+    }
+    {
+     coords 18.114 -6.81 122.489
+    }
+    {
+     coords -19.73 5.01 63.766
+    }
+    {
+     coords 50.679 -2.622 20.558
+    }
+    {
+     coords -67.698 2.188 28.12
+    }
+   }
+  }
+ }
+ {
+  coords 11246.635 16.871 2736.456
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 8.425 -8.463 -49.49
+    }
+    {
+     coords 52.243 -16.168 -0.802
+    }
+    {
+     coords 19.94 -15.433 65.542
+    }
+    {
+     coords -48.216 -7.809 87.213
+    }
+    {
+     coords -39.001 -1.759 38.542
+    }
+   }
+  }
+ }
+ {
+  coords 10106.51 7.248 3919.828
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -0.944 33.972 -159.467
+    }
+    {
+     coords 33.185 56.152 -219.216
+    }
+    {
+     coords 114.681 4.052 -99.419
+    }
+    {
+     coords 2.834 -0.871 11.791
+    }
+    {
+     coords -114.413 31.721 -60.778
+    }
+   }
+  }
+ }
+ {
+  coords 9653.323 13.844 1524.712
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 45.436 2.49 60.795
+    }
+    {
+     coords 80.675 -3.406 2.161
+    }
+    {
+     coords 43.138 -2.136 -48.306
+    }
+    {
+     coords 9.498 8.034 -83.281
+    }
+    {
+     coords -49.215 10.828 -18.014
+    }
+   }
+  }
+ }
+ {
+  coords 9959.112 6.744 224.865
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 22.521 -5.17 -17.567
+    }
+    {
+     coords -70.363 0.536 -3.571
+    }
+    {
+     coords -89.471 0.214 22.214
+    }
+    {
+     coords -46.096 4.159 43.291
+    }
+    {
+     coords -22.666 -5.084 -36.451
+    }
+   }
+  }
+ }
+ {
+  coords 9320.21 16.494 318.13
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -49.446 -3.998 4.821
+    }
+    {
+     coords -83.985 -13.836 5.855
+    }
+    {
+     coords -71.651 -9.527 45.065
+    }
+    {
+     coords 40.153 -3.237 -20.122
+    }
+    {
+     coords 69.557 0.061 3.145
+    }
+   }
+  }
+ }
+ {
+  coords 7336.7 11.529 1556.196
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 45.744 1.915 -55.798
+    }
+    {
+     coords 24.606 6.575 30.384
+    }
+    {
+     coords -75.219 -9.005 -3.298
+    }
+    {
+     coords -36.688 -9.063 -41.922
+    }
+    {
+     coords 17.494 -9.149 -106.051
+    }
+   }
+  }
+ }
+ {
+  coords 9411.316 45.619 1678.387
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -37.448 5.148 43.074
+    }
+    {
+     coords -22.363 2.736 -40.862
+    }
+    {
+     coords 0.652 -0.987 -81.37
+    }
+    {
+     coords 56.982 -5.919 -70.628
+    }
+    {
+     coords 30.215 -1.936 -16.986
+    }
+   }
+  }
+ }
+ {
+  coords 9104.534 79.147 2314.98
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 27.736 -0.57 4.382
+    }
+    {
+     coords 12.55 -1.767 -27.251
+    }
+    {
+     coords -1.001 0.726 47.31
+    }
+    {
+     coords -21.568 0.617 88.055
+    }
+    {
+     coords -25.959 0.056 16.007
+    }
+   }
+  }
+ }
+ {
+  coords 8477.988 132.645 3351.755
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -30.186 0.196 30.637
+    }
+    {
+     coords 18.413 -2.678 -51.454
+    }
+    {
+     coords -33.917 2.894 -22.156
+    }
+    {
+     coords 46.284 -1.384 7.466
+    }
+    {
+     coords 9.148 1.854 64.138
+    }
+   }
+  }
+ }
+ {
+  coords 6579.165 5.235 3121.292
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 27.77 -2.606 28.332
+    }
+    {
+     coords 25.7 0.949 -15.821
+    }
+    {
+     coords 83.457 3.238 8.788
+    }
+    {
+     coords 77.697 3.332 69.869
+    }
+    {
+     coords 61.091 0.588 -46.725
+    }
+   }
+  }
+ }
+}
+$grp GenericEntity : "{D4A604DD154470CD}Prefabs/Systems/AmbientVehicles/AmbientVehicleSpawnpoint_FIA.et" {
+ {
+  coords 6559.336 3.284 2356.253
+  angleY 116.013
+ }
+ {
+  coords 6566.948 3.394 2365.007
+  angleY 115.982
+ }
+ {
+  coords 7947.689 13.231 1471.178
+  angleY 86.514
+ }
+ {
+  coords 7954.498 12.42 1462.99
+  angleY 93.01
+ }
+ {
+  coords 9832.9 7.364 264.854
+  angleY -45.417
+ }
+ {
+  coords 9292.18 190.855 1148.97
+  angleY 93.866
+ }
+ {
+  coords 9947.943 2.468 1555.467
+  angleY -174.973
+ }
+ {
+  coords 9300.866 55.001 2039.727
+  angleY -118.69
+ }
+ {
+  coords 8788.674 95.271 2746.596
+  angleY 79.633
+ }
+ {
+  coords 8222.485 223.125 2172.65
+  angleY -37.091
+ }
+ {
+  coords 7194.191 136.909 2344.157
+  angleY -38.866
+ }
+ {
+  coords 11545.313 14.344 1491.685
+  angleY -106.369
+ }
+ {
+  coords 10650.912 149.016 2330.91
+  angleY -128.682
+ }
+ {
+  coords 9919.846 295.481 2580.252
+  angleY -10.272
+ }
+ {
+  coords 9911.878 294.868 2578.022
+  angleY -14.08
+ }
+ {
+  coords 11671.546 4.788 2114.186
+  angleY -72.123
+ }
+ {
+  coords 11671.114 8.576 2210.441
+  angleY -175.671
+ }
+ {
+  coords 9580.577 11.754 5336.301
+  angleY 141.646
+ }
+ {
+  coords 9345.27 7.369 5047.672
+  angleY -152.396
+ }
+ {
+  coords 9318.534 3.715 5074.892
+  angleY 127.417
+ }
+ {
+  coords 9564.664 11.078 5220.166
+  angleY -93.989
+ }
+}

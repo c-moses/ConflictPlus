@@ -1,0 +1,376 @@
+$grp GenericEntity : "{0DDAFCA92FF4451C}Prefabs/Systems/AmbientVehicles/AmbientVehicleSpawnpoint_CIV.et" {
+ {
+  coords 9834.236 7.189 268.958
+  angleY 44.343
+ }
+ {
+  coords 9875.462 6.969 244.773
+  angleY 63.266
+ }
+ {
+  coords 9913.871 11.167 271.163
+  angleY -166.289
+ }
+ {
+  coords 10366.038 34.653 384.156
+  angleY -65.354
+ }
+ {
+  coords 11553.171 14.375 1482.11
+  angleY -44.421
+ }
+ {
+  coords 11559.871 14.438 1480.678
+  angleY -47.753
+ }
+ {
+  coords 11546.643 14.366 1492.752
+  angleY -94.944
+ }
+ {
+  coords 11222.821 11.096 1641.499
+  angleY -148.466
+ }
+}
+$grp GenericEntity : "{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMilitaryBase.et" {
+ MOB_RockweedCape {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bCanBeHQ 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 1050
+     }
+    }
+    m_bIsSource 1
+   }
+  }
+  coords 9850.782 6.636 253.355
+  angleX -1.61
+  angleY 36.905
+  angleZ -2.326
+ }
+ MOB_CragPoint {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bCanBeHQ 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 1550
+     }
+    }
+    m_bIsSource 1
+   }
+  }
+  coords 11607.323 18.001 1496.33
+  angleY 135.048
+ }
+ ObjMain_Mechanic {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 175
+     }
+    }
+   }
+  }
+  coords 9782.27 5.527 1394.577
+  angleY 61.402
+ }
+ ObjMain_Industrial {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 150
+     }
+    }
+   }
+  }
+  coords 10103.071 9.839 1621.496
+  angleY 15.077
+ }
+ ObjMain_Headquarters {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 175
+     }
+    }
+   }
+  }
+  coords 9992.195 2.485 1563.917
+  angleY -162.712
+ }
+ ObjMain_FireStation {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 175
+     }
+    }
+   }
+  }
+  coords 9831.641 7.712 1577.98
+  angleY -44.627
+ }
+ ObjMain_Graveyard {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 175
+     }
+    }
+   }
+  }
+  coords 9809.723 28.371 1249.761
+  angleY -129.223
+ }
+ ObjMain_Downtown {
+  components {
+   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
+    m_bIsControlPoint 1
+   }
+   SCR_CoverageRadioComponent "{5C669673C2A82A2B}" {
+    Transceivers {
+     RelayTransceiver "{5C669673E8C94083}" {
+      "Transmitting Range" 175
+     }
+    }
+   }
+  }
+  coords 9692.688 11.961 1511.28
+  angleY 141.794
+ }
+}
+$grp GenericEntity : "{27941CDF3E7E1A5F}Prefabs/MP/Campaign/CampaignRemnantsSupplyDepot.et" {
+ Supplies_GasStation {
+  coords 9699.168 22.678 1717.32
+  {
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords -7.291 0.104 8.004
+    angleY -139.806
+   }
+  }
+ }
+ Supplies_Lookout {
+  coords 9959.008 3.374 1243.984
+  {
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords 2.539 0.066 3.178
+    angleY -116.066
+    angleZ -1.413
+   }
+  }
+ }
+ Supplies_Harbour {
+  coords 10194.582 2.688 1544.264
+  {
+   GenericEntity : "{C63BFEEA9DE1CF26}Prefabs/MP/Campaign/SupplyDepots/SupplyCache_S_FIA_05_Campaign.et" {
+    coords 4.124 0.028 -1.725
+    angleY -86.269
+   }
+  }
+ }
+}
+$grp GenericEntity : "{9273AB931008C271}Prefabs/Systems/AmbientPatrol/AmbientPatrolSpawnpoint_FIA.et" {
+ {
+  coords 10329.753 14.245 1662.234
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 37.679 -2.386 -12.549
+    }
+    {
+     coords 7.306 -4.531 -57.555
+    }
+    {
+     coords -59.519 -1.198 -25.268
+    }
+    {
+     coords -73.814 16.9 74.253
+    }
+    {
+     coords 2.998 10.718 60.489
+    }
+   }
+  }
+ }
+ {
+  coords 9969.431 3.525 1233.845
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 12.786 0.179 -9.426
+    }
+    {
+     coords -1.538 1.162 -46.536
+    }
+    {
+     coords -20.311 0.353 17.271
+    }
+    {
+     coords -31.549 9.183 -26.068
+    }
+    {
+     coords 16.282 -1.538 -82.454
+    }
+   }
+  }
+ }
+ {
+  coords 10122.284 2.5 1379.533
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -30.763 -0 -28.929
+    }
+    {
+     coords 30.64 -0.001 52.151
+    }
+    {
+     coords 75.754 -0.001 102.264
+    }
+    {
+     coords 39.778 0.001 102.479
+    }
+    {
+     coords 61.475 0.092 152.422
+    }
+   }
+  }
+ }
+ {
+  coords 9697.693 22.739 1735.772
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords 32.3 9.6 30.712
+    }
+    {
+     coords -46.729 14.507 63.367
+    }
+    {
+     coords -28.788 0.793 3.128
+    }
+    {
+     coords -24.587 -3.49 -39.909
+    }
+    {
+     coords 27.304 -1.221 -37.147
+    }
+   }
+  }
+ }
+ {
+  coords 9526.358 31.558 1609.297
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -61.113 8.555 -1.77
+    }
+    {
+     coords -75.021 11.554 42.867
+    }
+    {
+     coords 35.43 -6.691 -46.021
+    }
+    {
+     coords 64.85 -8.24 -24.191
+    }
+    {
+     coords -26.698 1.42 -39.859
+    }
+   }
+  }
+ }
+ {
+  coords 9942.416 16.048 1720.714
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -48.328 5.393 -10.819
+    }
+    {
+     coords -61.45 -4.931 -42.833
+    }
+    {
+     coords -13.276 -11.054 -54.89
+    }
+    {
+     coords 38.079 -8.863 -51.26
+    }
+    {
+     coords 45.782 8.686 2.814
+    }
+   }
+  }
+ }
+ {
+  coords 9649.52 42.425 1303.304
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -35.175 -1.19 60.996
+    }
+    {
+     coords -20.745 -18.801 100.937
+    }
+    {
+     coords 38.304 -9.66 58.958
+    }
+    {
+     coords 47.94 -16.132 15.169
+    }
+    {
+     coords 13.771 22.93 -77.741
+    }
+   }
+  }
+ }
+ {
+  coords 9909.161 42.284 947.559
+  {
+   $grp SCR_AIWaypoint : "{FBA8DC8FDA0E770D}Prefabs/AI/Waypoints/AIWaypoint_Patrol_Hierarchy.et" {
+    {
+     coords -35.154 11.597 -43.478
+    }
+    {
+     coords -115.199 22.76 37.086
+    }
+    {
+     coords -82.483 2.003 82.367
+    }
+    {
+     coords -20.06 -12.988 105.662
+    }
+    {
+     coords 15.349 -13.351 62.517
+    }
+   }
+  }
+ }
+}
