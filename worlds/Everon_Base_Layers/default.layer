@@ -41,7 +41,7 @@ PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/Perc
 }
 SCR_GameModeCampaign GameMode_Campaign : "{3B230AAC5252108F}Prefabs/MP/Modes/Conflict/GameMode_Campaign.et" {
  coords 7114.537 103.771 6278.017
- m_iControlPointsThreshold 6
+ m_iControlPointsThreshold 5
  m_iSuppliesReplenishThreshold 15000
  m_iRegularSuppliesIncome 30
  m_iRegularSuppliesIncomeBase 10

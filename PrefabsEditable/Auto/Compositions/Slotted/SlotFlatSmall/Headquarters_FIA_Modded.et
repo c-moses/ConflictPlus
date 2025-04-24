@@ -1,0 +1,22 @@
+GenericEntity : "{7CB2EB208F93C6D4}PrefabsEditable/Auto/Compositions/Slotted/SlotFlatSmall/E_Headquarters_S_FIA_01.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  FactionAffiliationComponent "{652F3E4212620C49}" {
+   "faction affiliation" "FIA"
+  }
+  SCR_EditableEntityComponent "{620EE6CE683652B5}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    m_aAuthoredLabels {
+     5 90 28
+    }
+    m_aAutoLabels {
+     12
+    }
+   }
+  }
+  SCR_MapDescriptorComponent "{653134364052336D}" {
+   MapItemDescriptor 1
+   MainType "Radio/ Tower"
+  }
+ }
+}

@@ -1,0 +1,16 @@
+GenericEntity : "{847605BB95F1F066}PrefabsEditable/Auto/Compositions/Slotted/SlotFlatSmall/E_Headquarters_S_USSR_01.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  SCR_EditableEntityComponent "{620EE6CD97AE36CC}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    m_aAuthoredLabels {
+     5 90 28
+    }
+   }
+  }
+  SCR_MapDescriptorComponent "{653134366B76E1E7}" {
+   MapItemDescriptor 1
+   MainType "Radio/ Tower"
+  }
+ }
+}

@@ -1,14 +1,17 @@
 modded class SCR_CampaignMilitaryBaseComponent
 {
-	string m_world = "";
+	//------------------------------------------------------------------------------------------------
 	
-	override void OnPostInit(IEntity owner)
+	void InitializeFOB(SCR_CampaignFaction faction)
 	{
-		super.OnPostInit(owner);
-		m_world = GetGame().GetWorldFile();
+		Initialize();
+		SetFaction(faction);
+		RecalculateRadioRange();
 	}
 	
-	override void RecalculateRadioRange() // this is a vanill method 
+	//------------------------------------------------------------------------------------------------
+	
+	override void RecalculateRadioRange()
 	{
 		float range = m_fRadioRangeDefault;
 		float thisRange;
@@ -16,7 +19,7 @@ modded class SCR_CampaignMilitaryBaseComponent
 		GetServicesByType(antennas, SCR_EServicePointType.RADIO_ANTENNA);
 		BaseRadioComponent radio;
 
-		bool seeding = m_world.StartsWith("worlds/Everon_Seed");
+		bool seeding = GetGame().GetWorldFile().StartsWith("worlds/Everon_Seed");
 		if (!seeding)
 		{
 			// Find antenna services, read max radio range from the radio component on their owners
@@ -62,6 +65,8 @@ modded class SCR_CampaignMilitaryBaseComponent
 		Replication.BumpMe();
 		OnRadioRangeChanged();
 	}
+	
+	override protected void SpawnStartingVehicles() {}
 	
 	override protected void HandleSpawnPointFaction()
 	{
