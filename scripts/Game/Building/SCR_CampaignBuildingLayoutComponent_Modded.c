@@ -10,20 +10,23 @@ modded class SCR_CampaignBuildingLayoutComponent
 		if (!linkComponent)
 			return;
 		
+		SCR_CampaignBuildingManagerComponent buildingMgr = GetBuildingManagerComponent();
+		if (!buildingMgr)
+			return;
+		
 		EntitySpawnParams spawnParams = new EntitySpawnParams;
 		ent.GetWorldTransform(spawnParams.Transform);
 
 		ResourceName resName = GetCompositionResourceName(m_iPrefabId);
-		SCR_CampaignBuildingManagerComponent buildingMgr = GetBuildingManagerComponent();
-		if (buildingMgr && FOB_Helper.IsFOB_USSR(resName))
+		if (FOB_Helper.IsFOB_USSR(resName))
 		{
 			buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.OPFOR);
 		}
-		else if (buildingMgr && FOB_Helper.IsFOB_US(resName))
+		else if (FOB_Helper.IsFOB_US(resName))
 		{
 			buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.BLUFOR);
 		}
-		else if (buildingMgr && FOB_Helper.IsFOB_FIA(resName))
+		else if (FOB_Helper.IsFOB_FIA(resName))
 		{
 			buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.INDFOR);
 		}

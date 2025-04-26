@@ -8,9 +8,5 @@ GenericEntity : "{9771776551C306E0}PrefabsEditable/Auto/Compositions/Slotted/Slo
     }
    }
   }
-  SCR_MapDescriptorComponent "{6531343609BAC4E9}" {
-   MapItemDescriptor 1
-   MainType "Radio/ Tower"
-  }
  }
 }

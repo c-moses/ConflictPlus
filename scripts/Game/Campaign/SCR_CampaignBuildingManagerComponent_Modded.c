@@ -1,55 +1,96 @@
 modded class SCR_CampaignBuildingManagerComponent
 {
-	[RplProp()]
-	protected ref array<vector> m_placedFOBs = new array<vector>();
+	protected ref map<string, SyncFOB> m_fobStates = new map<string, SyncFOB>();
 	
-	[RplProp()]
-	protected ref array<vector> m_builtFOBs = new array<vector>();
+	// -------------------------------------------------------------------------------------------------------
+	// --> Client
+	
+	void HandleAddFOB(vector fobPos, SyncFOB eSync)
+	{
+		if (!fobPos || fobPos == vector.Zero || eSync == SyncFOB.REMOVE_PLACED_FOB || eSync == SyncFOB.REMOVE_BUILT_FOB)
+			return;
+	
+		string key = fobPos.ToString();
+	
+		if (m_fobStates.Contains(key))
+			m_fobStates.Remove(key);
+	
+		m_fobStates.Set(key, eSync);
+	}
+	
+	void HandleRemoveFOB(vector fobPos, SyncFOB eSync)
+	{
+		if (!fobPos || fobPos == vector.Zero || eSync == SyncFOB.ADD_PLACED_FOB || eSync == SyncFOB.ADD_BUILT_FOB)
+			return;
+	
+		string key = fobPos.ToString();
+	
+		SyncFOB existingStatus;
+		if (m_fobStates.Find(key, existingStatus))
+		{
+			if (FOB_Helper.IsRemovingFOB(eSync) || existingStatus == eSync)
+				m_fobStates.Remove(key);
+		}
+	}
+	
+	// -------------------------------------------------------------------------------------------------------
+	// --> Client
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RpcSyncFOBs(vector hqPos, SyncFOB eSync)
+	{
+		if (FOB_Helper.IsRemovingFOB(eSync))
+			HandleRemoveFOB(hqPos, eSync);
+	
+		if (FOB_Helper.IsAddingFOB(eSync))
+			HandleAddFOB(hqPos, eSync);
+	}
 	
 	//------------------------------------------------------------------------------------------------
-	
-	array<vector> GetPlacedFOBs()
-	{
-		return m_placedFOBs;
-	}
+	// --> Server
 	
 	void AddPlacedFOB(vector fobPos)
 	{
 		if (IsProxy())
 			return;
-		
-		m_placedFOBs.Insert(fobPos);
-		Replication.BumpMe();
+	
+		if (fobPos == vector.Zero)
+			return;
+	
+		PrintFormat("[SCR_CampaignBuildingManagerComponent :: AddPlacedFOB] : fobPos=%1", fobPos);
+	
+		Rpc(RpcSyncFOBs, fobPos, SyncFOB.ADD_PLACED_FOB);
 	}
 	
-	void RemovePlacedFOB(vector pos)
+	
+	void RemovePlacedFOB(vector fobPos)
 	{
 		if (IsProxy())
 			return;
-		
-		int index = m_placedFOBs.Find(pos);
-		if (index != -1)
-		{
-			m_placedFOBs.Remove(index);
-			Replication.BumpMe();
-			return;
-		}
-		
-		FallbackRemovePlacedFOB(pos);
-	}
 	
-	//------------------------------------------------------------------------------------------------
+		if (fobPos == vector.Zero)
+			return;
+	
+		PrintFormat("[SCR_CampaignBuildingManagerComponent :: RemovePlacedFOB] : fobPos=%1", fobPos);
+	
+		Rpc(RpcSyncFOBs, fobPos, SyncFOB.REMOVE_PLACED_FOB);
+	}
 	
 	void AddBuiltFOB(vector fobPos)
 	{
 		if (IsProxy())
 			return;
 		
-		m_builtFOBs.Insert(fobPos);
-		Replication.BumpMe();
+		if (fobPos == vector.Zero)
+			return;
+		
+		PrintFormat("[SCR_CampaignBuildingManagerComponent :: AddBuiltFOB] : fobPos=%1", fobPos);
+		
+		Rpc(RpcSyncFOBs, fobPos, SyncFOB.ADD_BUILT_FOB);
 	}
 	
 	// ---------------------------------------------------------------------------------------
+	// --> Server
 	
 	void BuildFOB(EntitySpawnParams spawnParams, SCR_ECampaignFaction eFaction)
 	{
@@ -95,6 +136,7 @@ modded class SCR_CampaignBuildingManagerComponent
 	}
 	
 	// ---------------------------------------------------------------------------------------
+	// --> Server
 	
 	void RemoveAIGroupsFromFOB(IEntity newFob)
 	{
@@ -113,6 +155,7 @@ modded class SCR_CampaignBuildingManagerComponent
 	}
 	
 	// ---------------------------------------------------------------------------------------
+	// --> Server
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
 	void RpcUpdateRadioCoverage()
@@ -121,6 +164,40 @@ modded class SCR_CampaignBuildingManagerComponent
 	}
 	
 	// ---------------------------------------------------------------------------------------
+	// --> Utility
+	
+	array<vector> GetPlacedFOBs()
+	{
+		array<vector> placedFobs = {};
+	
+		if (!m_fobStates || m_fobStates.IsEmpty())
+			return placedFobs;
+	
+		foreach (string fobKey, SyncFOB status : m_fobStates)
+		{
+			if (status == SyncFOB.ADD_PLACED_FOB)
+			{
+				vector fobPos = Helper.StringToVector(fobKey);
+				placedFobs.Insert(fobPos);
+			}
+		}
+	
+		return placedFobs;
+	}
+	
+	bool IsBuiltFOB(vector fobPos)
+	{
+		if (!m_fobStates || m_fobStates.IsEmpty() || fobPos == vector.Zero)
+			return false;
+		
+		SyncFOB state;
+		string key = fobPos.ToString();
+	
+		if (m_fobStates.Find(key, state))
+			return state == SyncFOB.ADD_BUILT_FOB;
+	
+		return false;
+	}
 	
 	bool IsDistanceAwayFromAnyFOB(vector newPos, float distance)
 	{
@@ -139,52 +216,23 @@ modded class SCR_CampaignBuildingManagerComponent
 		vector nearestPos = vector.Zero;
 		float nearestDistanceSq = float.MAX;
 	
-		foreach (vector placedPos : m_placedFOBs)
+		if (!m_fobStates || m_fobStates.IsEmpty())
+			return nearestPos;
+	
+		foreach (string fobKey, SyncFOB status : m_fobStates)
 		{
-			float distSq = vector.DistanceSq(playerPos, placedPos);
+			if (status != SyncFOB.ADD_PLACED_FOB && status != SyncFOB.ADD_BUILT_FOB)
+				continue;
+	
+			vector fobPos = Helper.StringToVector(fobKey);
+			float distSq = vector.DistanceSq(playerPos, fobPos);
 			if (distSq < nearestDistanceSq)
 			{
 				nearestDistanceSq = distSq;
-				nearestPos = placedPos;
-			}
-		}
-		
-		foreach (vector builtPos : m_builtFOBs)
-		{
-			float distSq = vector.DistanceSq(playerPos, builtPos);
-			if (distSq < nearestDistanceSq)
-			{
-				nearestDistanceSq = distSq;
-				nearestPos = builtPos;
+				nearestPos = fobPos;
 			}
 		}
 	
 		return nearestPos;
-	}
-	
-	// ---------------------------------------------------------------------------------------
-	
-	// these never ran in my testing but we'll leave it in just in case 
-	
-	void FallbackRemovePlacedFOB(vector pos)
-	{
-		const float THRESHOLD = 1.0;
-		for (int i = 0; i < m_placedFOBs.Count(); i++)
-		{
-			vector fob = m_placedFOBs[i];
-			float distSq = vector.DistanceSq(fob, pos);
-	
-			PrintFormat("[FallbackRemoveFOB] Comparing %1 with %2 | DistSq: %3", pos, fob, distSq);
-	
-			if (distSq < THRESHOLD)
-			{
-				PrintFormat("[FallbackRemoveFOB] Proximity match found. Removing FOB at: %1", fob);
-				m_placedFOBs.Remove(i);
-				Replication.BumpMe();
-				return;
-			}
-		}
-	
-		Print("[FallbackRemoveFOB] No match found even with proximity fallback.");
 	}
 }

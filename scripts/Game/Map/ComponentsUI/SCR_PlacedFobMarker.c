@@ -1,85 +1,53 @@
-class SCR_PlacedFobMarker : SCR_MapUIBaseComponent
+class SCR_PlacedFobMarker : SCR_MapUIElementContainer
 {
-	/*protected ref array<Widget> m_placedFOBs = new array<Widget>();
-	float m_fobUpdateTimer = 0;
-	const float UPDATE_INTERVAL = 1.0;
+	[Attribute("{6E74BEC39BED5ABF}UI/layouts/PlacedFobMarker.layout", params: "layout")]
+	protected ResourceName m_placedFobMarker;
 	
-	override protected void OnMapOpen(MapConfiguration config)
-	{	
+	protected ref array<Widget> m_placedFobWidgets = new array<Widget>();
+	
+	override void OnMapOpen(MapConfiguration config)
+	{
 		super.OnMapOpen(config);
-		UpdatePlacedFOBs();
+		ShowPlacedFOBs();
 	}
-	
-	override void Update(float timeSlice)
+
+	protected void ShowPlacedFOBs()
 	{
-		super.Update(timeSlice);
-		m_fobUpdateTimer += timeSlice;
-		if (m_fobUpdateTimer >= UPDATE_INTERVAL)
-		{
-			UpdatePlacedFOBs();
-			m_fobUpdateTimer = 0;
-		}
-	}
+		ClearPlacedFobMarkers();
 	
-	SCR_CampaignBuildingManagerComponent GetBuildingManager()
-	{
-		SCR_GameModeCampaign campaign = SCR_GameModeCampaign.GetInstance();
-		if (!campaign)
-			return null;
-		
-		return SCR_CampaignBuildingManagerComponent.Cast(campaign.FindComponent(SCR_CampaignBuildingManagerComponent));
-	}
-	
-	protected void ClearExistingMarkers()
-	{
-		foreach (Widget w : m_placedFOBs)
-		{
-			if (w)
-				w.RemoveFromHierarchy();
-		}
-		
-		m_placedFOBs.Clear();
-	}
-	
-	protected void UpdatePlacedFOBs()
-	{
-		ClearExistingMarkers();
-		
-		SCR_CampaignBuildingManagerComponent buildingMgr = GetBuildingManager();
-		if (!buildingMgr)
-			return;
-		
-		array<vector> placedFobs = buildingMgr.GetPlacedFOBs();
-		if (!placedFobs || placedFobs.IsEmpty())
+		SCR_CampaignBuildingManagerComponent mgr = SCR_CampaignBuildingManagerComponent.Cast(m_GameMode.FindComponent(SCR_CampaignBuildingManagerComponent));
+		if (!mgr)
 			return;
 	
-		foreach (vector fobPos : placedFobs)
+		foreach (vector fobPos : mgr.GetPlacedFOBs())
 		{
-			Widget wdgt = GetGame().GetWorkspace().CreateWidgets("{6E74BEC39BED5ABF}UI/layouts/PlacedFobMarker.layout", m_RootWidget);
-			if (!wdgt)
+			Widget marker = GetGame().GetWorkspace().CreateWidgets("m_placedFobMarker, m_wIconsContainer);
+			if (!marker)
 				continue;
 	
-			ImageWidget image = ImageWidget.Cast(wdgt.FindAnyWidget("Image"));
-			if (!image)
+			FobMarkerUI handler = FobMarkerUI.Cast(marker.FindHandler(FobMarkerUI));
+			if (!handler)
 				continue;
 	
-			SCR_FactionManager factionManager = SCR_FactionManager.Cast(GetGame().GetFactionManager());
-			Faction playerFaction;
-			if (factionManager)
-				playerFaction = factionManager.SGetLocalPlayerFaction();
+			handler.SetPos(fobPos);
+			handler.SetParent(this);
 	
-			if (playerFaction)
-				image.SetColor(Color.FromInt(playerFaction.GetFactionColor().PackToInt()));
-	
-			float x, y;
-			SCR_MapEntity.GetMapInstance().WorldToScreen(fobPos[0], fobPos[2], x, y, true);
-			
-			x = GetGame().GetWorkspace().DPIUnscale(x);
-			y = GetGame().GetWorkspace().DPIUnscale(y);
-	
-			FrameSlot.SetPos(wdgt, x, y);
-	
-			m_placedFOBs.Insert(wdgt);
+			m_placedFobWidgets.Insert(marker);
+			m_mIcons.Set(marker, handler);
 		}
-	}*/
+	}
+
+	protected void ClearPlacedFobMarkers()
+	{
+		foreach (Widget w : m_placedFobWidgets)
+		{
+			if (!w)
+				continue;
+	
+			m_mIcons.Remove(w);
+			w.RemoveFromHierarchy();
+		}
+	
+		m_placedFobWidgets.Clear();
+	}
 }

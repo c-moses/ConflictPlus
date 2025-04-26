@@ -1,6 +1,10 @@
 FrameWidgetClass {
  Name "rootFrame"
  Clipping False
+ components {
+  FobMarkerUI "{6533054F7DED820D}" {
+  }
+ }
  {
   OverlayWidgetClass "{64EE3515AC434A64}" {
    Name "Overlay0"
@@ -22,6 +26,10 @@ FrameWidgetClass {
      Slot OverlayWidgetSlot "{64F378D31AC571C0}" {
      }
      Clipping False
+     components {
+      FobMarkerUI "{653305187519D3D6}" {
+      }
+     }
      Pivot 0 0
      Texture "{FDD5423E69D007F8}UI/Textures/Icons/icons_wrapperUI-128.imageset"
      Image "building"

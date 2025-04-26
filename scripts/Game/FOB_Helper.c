@@ -1,3 +1,11 @@
+enum SyncFOB
+{
+	ADD_PLACED_FOB,
+	ADD_BUILT_FOB,
+	REMOVE_PLACED_FOB,
+	REMOVE_BUILT_FOB,
+}
+
 class FOB_Helper
 {
 	static ResourceName m_US_FOB = "{0E30CC8B7D39AD67}PrefabsEditable/Auto/Compositions/Slotted/SlotFlatSmall/Headquarters_US_Modded.et";
@@ -22,5 +30,17 @@ class FOB_Helper
 	static bool IsFOB_FIA(ResourceName resName)
 	{
 		return resName == m_FIA_FOB;
+	}
+	
+	// -------------------------------------------------------------------------------------------------------
+	
+	static bool IsAddingFOB(SyncFOB eSync)
+	{
+		return eSync == SyncFOB.ADD_PLACED_FOB || eSync == SyncFOB.ADD_BUILT_FOB;
+	}
+	
+	static bool IsRemovingFOB(SyncFOB eSync)
+	{
+		return eSync == SyncFOB.REMOVE_PLACED_FOB || eSync == SyncFOB.REMOVE_BUILT_FOB;
 	}
 }

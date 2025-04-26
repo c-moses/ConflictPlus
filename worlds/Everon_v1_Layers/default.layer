@@ -167,42 +167,6 @@ $grp GenericEntity : "{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMil
    }
   }
  }
- Obj_StubwoodPoint {
-  components {
-   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
-    m_bDisableWhenUnusedAsHQ 0
-   }
-  }
-  coords 6539.293 2.278 2315.89
-  angleY 38.079
-  {
-   GenericEntity : "{3DFA7F32B1C56399}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V3_storage_FIA_covered.et" {
-    coords -5.913 0.613 12.346
-    angleY -37.269
-    {
-     GenericEntity {
-      ID "5D30E783A6282BD7"
-      coords 0 0 0
-      angleX 2.64
-      angleY 0.126
-      angleZ 2.724
-     }
-    }
-   }
-   GenericEntity : "{7D2C0FB3B8ACF2B0}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_Large_01/SupplyStack_Large_01_storage_FIA_covered.et" {
-    coords -5.299 0.562 11.073
-    angleX 2.678
-    angleY -37.953
-    angleZ 2.687
-   }
-   GenericEntity : "{EF62478046B376DD}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V2_storage_FIA_covered.et" {
-    coords -6.848 0.665 11.195
-    angleX 2.678
-    angleY -37.953
-    angleZ 2.687
-   }
-  }
- }
  ObjMain_Regina {
   components {
    SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
@@ -223,77 +187,6 @@ $grp GenericEntity : "{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMil
   coords 9333.576 4.244 5069.19
   angleY 166.111
  }
- Obj_SkuaPoint {
-  components {
-   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
-    m_bDisableWhenUnusedAsHQ 0
-   }
-  }
-  coords 9605.062 1.167 5469.06
-  angleY -20.246
-  {
-   GenericEntity : "{3DFA7F32B1C56399}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V3_storage_FIA_covered.et" {
-    coords -3.076 -0.066 9.855
-    angleY 20.246
-    angleZ 1.79
-   }
-   GenericEntity : "{7D2C0FB3B8ACF2B0}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_Large_01/SupplyStack_Large_01_storage_FIA_covered.et" {
-    coords -4.52 -0.015 9.835
-    angleY 20.246
-    angleZ 2.684
-   }
-   GenericEntity : "{EF62478046B376DD}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V2_storage_FIA_covered.et" {
-    coords -3.516 -0.066 8.667
-    angleY 20.246
-    angleZ 1.79
-   }
-  }
- }
- Obj_PanoramaLodge {
-  components {
-   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
-    m_bDisableWhenUnusedAsHQ 0
-   }
-  }
-  coords 8243.105 224.125 2180.717
-  angleY -147.814
- }
- Obj_HornikLodge {
-  components {
-   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
-    m_bDisableWhenUnusedAsHQ 0
-   }
-  }
-  coords 9909.601 296.813 2608.213
-  angleY 163.67
- }
- Obj_MonfortCastle {
-  components {
-   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
-    m_bDisableWhenUnusedAsHQ 0
-   }
-  }
-  coords 9339.813 196.641 1145.23
-  angleY 171.21
- }
- Obj_MargretsMount {
-  components {
-   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
-    m_bDisableWhenUnusedAsHQ 0
-   }
-  }
-  coords 9458.908 326.897 3880.441
-  angleY 72.399
- }
- Obj_Vernon {
-  components {
-   SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
-    m_bDisableWhenUnusedAsHQ 0
-   }
-  }
-  coords 9259.639 57.323 2058.505
-  angleY 50.62
- }
  ObjMain_SaintPierre {
   components {
    SCR_CampaignMilitaryBaseComponent "{5AFC974A70234D1C}" {
@@ -303,34 +196,6 @@ $grp GenericEntity : "{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMil
   }
   coords 9991.546 2.463 1561.645
   angleY -164.907
- }
- Obj_Cascades {
-  coords 10228.916 7.494 3279.783
-  angleY 103.921
-  {
-   GenericEntity : "{3DFA7F32B1C56399}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V3_storage_FIA_covered.et" {
-    coords 8.76 0.757 -11.196
-    angleX 1.786
-    angleY -103.837
-    angleZ 2.685
-   }
-   GenericEntity : "{7D2C0FB3B8ACF2B0}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_Large_01/SupplyStack_Large_01_storage_FIA_covered.et" {
-    coords 7.509 0.851 -11.953
-    angleX 2.673
-    angleY -103.754
-    angleZ 3.58
-   }
-   GenericEntity : "{EF62478046B376DD}Prefabs/Props/Military/SupplyBox/SupplyStack/SupplyStack_01/SupplyStack_01_V2_storage_FIA_covered.et" {
-    coords 8.984 0.828 -12.539
-    angleX 3.569
-    angleY -103.754
-    angleZ 2.689
-   }
-  }
- }
- Obj_LeBosc {
-  coords 7938.754 12.169 1461.653
-  angleY 35.464
  }
  ObjMain_Courbet {
   components {
@@ -365,10 +230,6 @@ $grp GenericEntity : "{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMil
   }
   coords 11641.716 6.245 2162.114
   angleY 107.005
- }
- Obj_OreRidge {
-  coords 10673.095 148.671 2344.435
-  angleY -81.985
  }
 }
 GenericEntity : "{13A99500A14FA14C}Prefabs/Props/Military/SupplyBox/SupplyShippingContainers/SupplyShippingContainers_01/SupplyShippingContainers_01_20ft.et" {

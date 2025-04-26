@@ -6,40 +6,41 @@ modded class SCR_CampaignBuildingCompositionComponent
 		
 		if (!entity)
 			return;
-		
+	
 		BaseGameMode gameMode = GetGame().GetGameMode();
 		if (!gameMode)
 			return;
-		
+	
 		SCR_CampaignBuildingManagerComponent buildingManagerComponent = SCR_CampaignBuildingManagerComponent.Cast(gameMode.FindComponent(SCR_CampaignBuildingManagerComponent));
 		if (!buildingManagerComponent)
 			return;
-
+	
 		ResourceName resName = buildingManagerComponent.GetCompositionResourceName(prefabId);
-		if (FOB_Helper.IsFOB(resName))
-		{
-			buildingManagerComponent.AddPlacedFOB(entity.GetOwner().GetOrigin());
-		}
+		if (!FOB_Helper.IsFOB(resName))
+			return;
+	
+		buildingManagerComponent.AddPlacedFOB(entity.GetOwner().GetOrigin());
 	}
 	
 	//	-------------------------------------------------------------------------------
 	
 	override void OnDelete(IEntity owner)
 	{
-		if (FOB_Helper.IsFOB(owner.GetPrefabData().GetPrefabName()))
-			OnDeletedFOB(owner.GetOrigin());
-		
+		ResourceName prefabName = owner.GetPrefabData().GetPrefabName();
+		if (FOB_Helper.IsFOB(prefabName))
+			OnDeletedFOB(owner);
+	
 		super.OnDelete(owner);
 	}
 	
-	void OnDeletedFOB(vector fobPos)
+	void OnDeletedFOB(IEntity entity)
 	{
 		if (IsProxy())
 			return;
-		
-		if (fobPos == vector.Zero)
+	
+		if (!entity)
 			return;
-		
+	
 		SCR_GameModeCampaign campaign = SCR_GameModeCampaign.GetInstance();
 		if (!campaign)
 			return;
@@ -47,7 +48,7 @@ modded class SCR_CampaignBuildingCompositionComponent
 		SCR_CampaignBuildingManagerComponent buildingMgr = SCR_CampaignBuildingManagerComponent.Cast(campaign.FindComponent(SCR_CampaignBuildingManagerComponent));
 		if (!buildingMgr)
 			return;
-		
-		buildingMgr.RemovePlacedFOB(fobPos);
+	
+		buildingMgr.RemovePlacedFOB(entity.GetOrigin());
 	}
 }
