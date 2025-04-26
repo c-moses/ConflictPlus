@@ -1,8 +1,6 @@
-class SCR_PlacedFobMarker : SCR_MapUIElementContainer
+modded class SCR_MapCampaignUI
 {
-	[Attribute("{6E74BEC39BED5ABF}UI/layouts/PlacedFobMarker.layout", params: "layout")]
-	protected ResourceName m_placedFobMarker;
-	
+	protected ResourceName m_placedFobMarker = "{6E74BEC39BED5ABF}UI/layouts/PlacedFobMarker.layout";
 	protected ref array<Widget> m_placedFobWidgets = new array<Widget>();
 	
 	override void OnMapOpen(MapConfiguration config)
@@ -10,18 +8,22 @@ class SCR_PlacedFobMarker : SCR_MapUIElementContainer
 		super.OnMapOpen(config);
 		ShowPlacedFOBs();
 	}
-
+	
+	override void OnMapClose(MapConfiguration config)
+	{
+		super.OnMapClose(config);
+		ClearPlacedFobMarkers();
+	}
+	
 	protected void ShowPlacedFOBs()
 	{
-		ClearPlacedFobMarkers();
-	
 		SCR_CampaignBuildingManagerComponent mgr = SCR_CampaignBuildingManagerComponent.Cast(m_GameMode.FindComponent(SCR_CampaignBuildingManagerComponent));
 		if (!mgr)
 			return;
 	
 		foreach (vector fobPos : mgr.GetPlacedFOBs())
 		{
-			Widget marker = GetGame().GetWorkspace().CreateWidgets("m_placedFobMarker, m_wIconsContainer);
+			Widget marker = GetGame().GetWorkspace().CreateWidgets(m_placedFobMarker, m_wIconsContainer);
 			if (!marker)
 				continue;
 	
@@ -35,6 +37,8 @@ class SCR_PlacedFobMarker : SCR_MapUIElementContainer
 			m_placedFobWidgets.Insert(marker);
 			m_mIcons.Set(marker, handler);
 		}
+		
+		UpdateIcons();
 	}
 
 	protected void ClearPlacedFobMarkers()
