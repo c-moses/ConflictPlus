@@ -2,11 +2,64 @@ modded class SCR_CampaignMilitaryBaseComponent
 {
 	//------------------------------------------------------------------------------------------------
 	
+	void SpawnFOB(ResourceName prefab, vector position, vector rotation, bool isMainTent = false)
+	{
+		if (prefab.IsEmpty())
+			return;
+
+		if (position == vector.Zero)
+			return;
+
+		EntitySpawnParams params = EntitySpawnParams();
+		GetOwner().GetWorldTransform(params.Transform);
+		params.TransformMode = ETransformMode.WORLD;
+		Math3D.AnglesToMatrix(rotation, params.Transform);
+		params.Transform[3] = position;
+
+		IEntity composition = GetGame().SpawnEntityPrefab(Resource.Load(prefab), null, params);
+
+		if (!composition)
+			return;
+
+		m_HQTent = composition;
+
+		SCR_AIWorld aiWorld = SCR_AIWorld.Cast(GetGame().GetAIWorld());
+
+		if (aiWorld)
+			aiWorld.RequestNavmeshRebuildEntity(composition);
+
+		SCR_EditableEntityComponent editableEntity = SCR_EditableEntityComponent.Cast(composition.FindComponent(SCR_EditableEntityComponent));
+		vector transform[4];
+
+		if (!editableEntity)
+		{
+			GetOwner().GetTransform(transform);
+			SCR_TerrainHelper.SnapToTerrain(transform, composition.GetWorld());
+			composition.SetTransform(transform);
+			return;
+		}
+
+		editableEntity.GetTransform(transform);
+
+		if (!SCR_TerrainHelper.SnapToTerrain(transform, composition.GetWorld()))
+			return;
+
+		editableEntity.SetTransformWithChildren(transform);
+		editableEntity.SetIsFOB(true);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	
 	void InitializeFOB(SCR_CampaignFaction faction)
 	{
 		Initialize();
 		SetFaction(faction);
-		RecalculateRadioRange();
+	}
+	
+	void RemoveFOB()
+	{
+		SCR_EntityHelper.DeleteEntityAndChildren(m_HQTent);
+		Disable();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -66,7 +119,14 @@ modded class SCR_CampaignMilitaryBaseComponent
 		OnRadioRangeChanged();
 	}
 	
-	override protected void SpawnStartingVehicles() {}
+	override protected void SpawnStartingVehicles() 
+	{
+		bool invasion = GetGame().GetWorldFile().StartsWith("worlds/Everon_v1");
+		if (invasion)
+			return;
+		
+		super.SpawnStartingVehicles();
+	}
 	
 	override protected void HandleSpawnPointFaction()
 	{

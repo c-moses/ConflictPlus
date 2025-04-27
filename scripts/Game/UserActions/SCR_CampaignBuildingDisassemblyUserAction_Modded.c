@@ -1,96 +1,35 @@
 modded class SCR_CampaignBuildingDisassemblyUserAction
 {
-	protected override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
-	{
-		m_RootEntity = pOwnerEntity.GetRootParent();
+	// The user action is shown when the preview is visible - means player has a building tool.
+	override bool CanBeShownScript(IEntity user)
+	{									
+		if (m_DoNotDisassemble && !m_EditableEntity.IsFOB())
+			return false;
+		
+		if (m_bSameFactionDisassembleOnly && !IsPlayerFactionSame(user))
+			return false;
 				
-		m_CompositionComponent = SCR_CampaignBuildingCompositionComponent.Cast(m_RootEntity.FindComponent(SCR_CampaignBuildingCompositionComponent));
-		m_EditableEntity = SCR_EditableEntityComponent.Cast(m_RootEntity.FindComponent(SCR_EditableEntityComponent));
-		m_LayoutComponent = SCR_CampaignBuildingLayoutComponent.Cast(pOwnerEntity.FindComponent(SCR_CampaignBuildingLayoutComponent));
-					
-		GetBuildingAction();
-		SetEditorManager();
-		
-		BaseGameMode gameMode = GetGame().GetGameMode();
-		if (!gameMode)
-			return;
-
-		SCR_CampaignBuildingManagerComponent buildingManagerComponent = SCR_CampaignBuildingManagerComponent.Cast(gameMode.FindComponent(SCR_CampaignBuildingManagerComponent));
-		if (!buildingManagerComponent)
-			return;
-		
-		if (m_CompositionComponent && GetOwner() == GetOwner().GetRootParent())
+		if (!m_GadgetManager)
 		{
-			m_CompositionComponent.GetOnCompositionSpawned().Insert(OnCompositionSpawned);
+			m_GadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(user);
 			
-			m_bSameFactionDisassembleOnly = buildingManagerComponent.CanDisassembleSameFactionOnly();
-			m_bDisassembleOnlyWhenCapturing = buildingManagerComponent.CanDisassembleOnlyWhenCapturing();
+			SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
+			if (playerController)
+				playerController.m_OnControlledEntityChanged.Insert(SetNewGadgetManager);
 			
-			if (m_bSameFactionDisassembleOnly || m_bDisassembleOnlyWhenCapturing)
-				m_CompositionComponent.GetOnBuilderSet().Insert(CacheFactionAffiliationComponent);
+			return false;
 		}
-			
-		// Temporary solution how to prevent disassembly of HQ in Conflict.
-		SCR_GameModeCampaign campaignGameMode = SCR_GameModeCampaign.Cast(GetGame().GetGameMode());
-		if (!campaignGameMode || !m_EditableEntity)
-			return;
-		
-		SCR_EditableEntityUIInfo editableEntityUIInfo = SCR_EditableEntityUIInfo.Cast(m_EditableEntity.GetInfo(GetOwner()));
-		if (!editableEntityUIInfo)
-			return;
-		
-		array<EEditableEntityLabel> entityLabels = {};
-		editableEntityUIInfo.GetEntityLabels(entityLabels);
-		
-		// Only block disassembly of HQ if it's NOT part of a built FOB
-		if (entityLabels.Contains(EEditableEntityLabel.SERVICE_HQ) && !buildingManagerComponent.IsBuiltFOB(m_RootEntity.GetOrigin()))
-			m_DoNotDisassemble = true;
-	}
-	
-	/* vanilla method here
-	protected override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
-	{
-		m_RootEntity = pOwnerEntity.GetRootParent();
-				
-		m_CompositionComponent = SCR_CampaignBuildingCompositionComponent.Cast(m_RootEntity.FindComponent(SCR_CampaignBuildingCompositionComponent));
-		m_EditableEntity = SCR_EditableEntityComponent.Cast(m_RootEntity.FindComponent(SCR_EditableEntityComponent));
-		m_LayoutComponent = SCR_CampaignBuildingLayoutComponent.Cast(pOwnerEntity.FindComponent(SCR_CampaignBuildingLayoutComponent));
 					
-		GetBuildingAction();
-		SetEditorManager();
+		if (!SCR_CampaignBuildingGadgetToolComponent.Cast(m_GadgetManager.GetHeldGadgetComponent()))
+			return false;
 		
-		if (m_CompositionComponent && GetOwner() == GetOwner().GetRootParent())
-		{
-			m_CompositionComponent.GetOnCompositionSpawned().Insert(OnCompositionSpawned);
-			
-			BaseGameMode gameMode = GetGame().GetGameMode();
-			if (!gameMode)
-				return;
-	
-			SCR_CampaignBuildingManagerComponent buildingManagerComponent = SCR_CampaignBuildingManagerComponent.Cast(gameMode.FindComponent(SCR_CampaignBuildingManagerComponent));
-			if (!buildingManagerComponent)
-				return;
-			
-			m_bSameFactionDisassembleOnly = buildingManagerComponent.CanDisassembleSameFactionOnly();
-			m_bDisassembleOnlyWhenCapturing = buildingManagerComponent.CanDisassembleOnlyWhenCapturing();
-			
-			if (m_bSameFactionDisassembleOnly || m_bDisassembleOnlyWhenCapturing)
-				m_CompositionComponent.GetOnBuilderSet().Insert(CacheFactionAffiliationComponent);
-		}
-			
-		// Temporary solution how to prevent disassembly of HQ in Conflict.
-		SCR_GameModeCampaign campaignGameMode = SCR_GameModeCampaign.Cast(GetGame().GetGameMode());
-		if (!campaignGameMode || !m_EditableEntity)
-			return;
+		// The user action is on entity with composition component, show it if the composition is spawned.
+		if (GetOwner() == GetOwner().GetRootParent())
+			return m_bCompositionSpawned;
 		
-		SCR_EditableEntityUIInfo editableEntityUIInfo = SCR_EditableEntityUIInfo.Cast(m_EditableEntity.GetInfo(GetOwner()));
-		if (!editableEntityUIInfo)
-			return;
+		if (m_BuildAction && !m_BuildAction.IsShown())
+			return false;
 		
-		array<EEditableEntityLabel> entityLabels = {};
-		editableEntityUIInfo.GetEntityLabels(entityLabels);
-		if (entityLabels.Contains(EEditableEntityLabel.SERVICE_HQ))
-			m_DoNotDisassemble = true;
+		return m_LayoutComponent;
 	}
-	*/
 }

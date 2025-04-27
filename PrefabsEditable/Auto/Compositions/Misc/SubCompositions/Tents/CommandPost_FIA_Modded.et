@@ -1,0 +1,12 @@
+GenericEntity : "{16D014F5A633FF27}PrefabsEditable/Auto/Compositions/Misc/SubCompositions/Tents/E_Tent_CommandPost_FIA_01.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  SCR_EditorLinkComponent "{620EE6CE7253BF5A}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{620EE6CE7240D37C}" {
+     m_Prefab "{C083B3EA8C1C8944}PrefabsEditable/Auto/Compositions/Misc/SubCompositions/Furniture/E_Cabinet_Medical_FIA_01.et"
+    }
+   }
+  }
+ }
+}

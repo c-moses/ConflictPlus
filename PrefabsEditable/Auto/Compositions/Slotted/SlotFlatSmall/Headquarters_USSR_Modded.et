@@ -8,5 +8,14 @@ GenericEntity : "{847605BB95F1F066}PrefabsEditable/Auto/Compositions/Slotted/Slo
     }
    }
   }
+  SCR_EditorLinkComponent "{620EE6CD973AA884}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{620EE6CD973C657D}" {
+     m_Prefab "{05703BE3A35ADDA8}PrefabsEditable/Auto/Compositions/Misc/SubCompositions/CommandPost_USSR_Modded.et"
+    }
+    SCR_EditorLinkEntry "{620EE6CD972E9E92}" {
+    }
+   }
+  }
  }
 }

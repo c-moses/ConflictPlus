@@ -16,30 +16,28 @@ modded class SCR_CampaignBuildingLayoutComponent
 		
 		EntitySpawnParams spawnParams = new EntitySpawnParams;
 		ent.GetWorldTransform(spawnParams.Transform);
-
+	
 		ResourceName resName = GetCompositionResourceName(m_iPrefabId);
-		if (FOB_Helper.IsFOB_USSR(resName))
+		if (FOB_Helper.IsFOB(resName))
 		{
-			buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.OPFOR);
-		}
-		else if (FOB_Helper.IsFOB_US(resName))
-		{
-			buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.BLUFOR);
-		}
-		else if (FOB_Helper.IsFOB_FIA(resName))
-		{
-			buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.INDFOR);
-		}
-		else
-		{
-			linkComponent.SpawnComposition();
+			if (FOB_Helper.IsFOB_USSR(resName))
+				buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.OPFOR);
+			else if (FOB_Helper.IsFOB_US(resName))
+				buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.BLUFOR);
+			else if (FOB_Helper.IsFOB_FIA(resName))
+				buildingMgr.BuildFOB(spawnParams, SCR_ECampaignFaction.INDFOR);
 			
-			SCR_EditableEntityComponent entity = SCR_EditableEntityComponent.GetEditableEntity(ent);
-			if (entity)
-			{
-				SCR_EditorPreviewParams params = SCR_EditorPreviewParams.CreateParams(spawnParams.Transform, verticalMode: EEditorTransformVertical.TERRAIN);
-				SCR_RefPreviewEntity.SpawnAndApplyReference(entity, params);
-			}
+			LockCompositionInteraction();
+			return;
+		}
+		
+		linkComponent.SpawnComposition();
+			
+		SCR_EditableEntityComponent entity = SCR_EditableEntityComponent.GetEditableEntity(ent);
+		if (entity)
+		{
+			SCR_EditorPreviewParams params = SCR_EditorPreviewParams.CreateParams(spawnParams.Transform, verticalMode: EEditorTransformVertical.TERRAIN);
+			SCR_RefPreviewEntity.SpawnAndApplyReference(entity, params);
 		}
 		
 		LockCompositionInteraction();

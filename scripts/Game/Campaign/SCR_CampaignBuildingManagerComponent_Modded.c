@@ -1,6 +1,7 @@
 modded class SCR_CampaignBuildingManagerComponent
 {
 	protected ref map<string, SyncFOB> m_fobStates = new map<string, SyncFOB>();
+	protected ref array<IEntity> m_builtMiliBases = new array<IEntity> ();
 	
 	// -------------------------------------------------------------------------------------------------------
 	// --> Client
@@ -49,6 +50,7 @@ modded class SCR_CampaignBuildingManagerComponent
 	//------------------------------------------------------------------------------------------------
 	// --> Server
 	
+	// called from SCR_CampaignBuildingCompositionComponent :: SpawnCompositionLayout
 	void AddPlacedFOB(vector fobPos)
 	{
 		if (IsProxy())
@@ -63,6 +65,7 @@ modded class SCR_CampaignBuildingManagerComponent
 	}
 	
 	
+	// called from SCR_CampaignBuildingCompositionComponent :: OnDeletedFOB
 	void RemovePlacedFOB(vector fobPos)
 	{
 		if (IsProxy())
@@ -75,6 +78,11 @@ modded class SCR_CampaignBuildingManagerComponent
 	
 		Rpc(RpcSyncFOBs, fobPos, SyncFOB.REMOVE_PLACED_FOB);
 	}
+	
+
+	
+	//------------------------------------------------------------------------------------------------
+	// --> Server
 	
 	void AddBuiltFOB(vector fobPos)
 	{
@@ -89,13 +97,86 @@ modded class SCR_CampaignBuildingManagerComponent
 		Rpc(RpcSyncFOBs, fobPos, SyncFOB.ADD_BUILT_FOB);
 	}
 	
+	void RemoveBuiltFOB(vector fobPos)
+	{
+		if (IsProxy())
+			return;
+	
+		if (fobPos == vector.Zero)
+			return;
+	
+		PrintFormat("[SCR_CampaignBuildingManagerComponent :: RemoveBuiltFOB] : fobPos=%1", fobPos);
+	
+		Rpc(RpcSyncFOBs, fobPos, SyncFOB.REMOVE_BUILT_FOB);
+	}
+	
 	// ---------------------------------------------------------------------------------------
 	// --> Server
 	
+	// called from SCR_CampaignBuildingNetworkComponent :: RpcAsk_DeleteCompositionByUserAction
+	void RemoveFOB(IEntity miliHq)
+	{
+		if (IsProxy())
+			return;
+	
+		PrintFormat("[SCR_CampaignBuildingManagerComponent :: RemoveFOB] called on the server with IEntity %1 at position %2", miliHq.GetPrefabData().GetPrefabName(), miliHq.GetOrigin().ToString());
+	
+		IEntity miliBase;
+		vector miliBasePos;
+		foreach (IEntity baseEntity : m_builtMiliBases)
+		{
+			PrintFormat("[SCR_CampaignBuildingManagerComponent :: RemoveFOB] checking m_builtMiliBases : baseEntity at position %1", baseEntity.GetOrigin().ToString());
+	
+			float distSq = vector.DistanceSq(baseEntity.GetOrigin(), miliHq.GetOrigin());
+			if (distSq < 3.0)
+			{
+				miliBase = baseEntity;
+				miliBasePos = miliBase.GetOrigin();
+				PrintFormat("[SCR_CampaignBuildingManagerComponent :: RemoveFOB] found close match");
+				break;
+			}
+		}
+	
+		if (!miliBase)
+		{
+			Print("[SCR_CampaignBuildingManagerComponent :: RemoveFOB] No matching military base found!");
+			return;
+		}
+	
+		SCR_CampaignMilitaryBaseComponent campaignBaseComp = SCR_CampaignMilitaryBaseComponent.Cast(miliBase.FindComponent(SCR_CampaignMilitaryBaseComponent));
+		SCR_CoverageRadioComponent radioCoverageComp = SCR_CoverageRadioComponent.Cast(miliBase.FindComponent(SCR_CoverageRadioComponent));
+		if (!campaignBaseComp || !radioCoverageComp)
+		{
+			Print("[SCR_CampaignBuildingManagerComponent :: RemoveFOB] SCR_CampaignMilitaryBaseComponent or SCR_CoverageRadioComponent not found!");
+			return;
+		}
+	
+		
+		campaignBaseComp.RemoveFOB();
+		radioCoverageComp.RemoveRadioFOB();
+		SCR_EntityHelper.DeleteEntityAndChildren(miliBase);
+		RemoveBuiltFOB(miliBasePos);
+		
+		DebugNearbyEntities(miliBasePos, 15.0);
+	
+		PrintFormat("[SCR_CampaignBuildingManagerComponent :: RemoveFOB] Successfully removed military base");
+	
+		if (RplComponent.Cast(GetOwner().FindComponent(RplComponent)))
+			Rpc(RpcUpdateRadioCoverage);
+	}
+	
+
+	
+	// ---------------------------------------------------------------------------------------
+	// --> Server
+	
+	// called from SCR_CampaignBuildingLayoutComponent :: SpawnComposition
 	void BuildFOB(EntitySpawnParams spawnParams, SCR_ECampaignFaction eFaction)
 	{
 		if (IsProxy())
 			return;
+		
+		RemovePlacedFOBs(spawnParams.Transform[3], 5.0);
 		
 		Resource resource = Resource.Load("{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMilitaryBase.et");
 		if (!resource.IsValid())
@@ -120,11 +201,12 @@ modded class SCR_CampaignBuildingManagerComponent
 		SCR_CoverageRadioComponent radioCoverageComp = SCR_CoverageRadioComponent.Cast(fob.FindComponent(SCR_CoverageRadioComponent));
 		if (!campaignBaseComp || !radioCoverageComp)
 		{
-			RplComponent.DeleteRplEntity(fob, true);
+			SCR_EntityHelper.DeleteEntityAndChildren(fob);
 			return;
 		}
 
-		campaignBaseComp.SpawnBuilding(campaign.GetFactionByEnum(eFaction).GetBuildingPrefab(EEditableEntityLabel.SERVICE_HQ), spawnParams.Transform[3], Math3D.MatrixToAngles(spawnParams.Transform), true);	
+		m_builtMiliBases.Insert(fob);
+		campaignBaseComp.SpawnFOB(campaign.GetFactionByEnum(eFaction).GetBuildingPrefab(EEditableEntityLabel.SERVICE_HQ), spawnParams.Transform[3], Math3D.MatrixToAngles(spawnParams.Transform), true);	
 		campaignBaseComp.InitializeFOB(fobFaction);
 		radioCoverageComp.InitializeRadioFOB();
 		
@@ -137,6 +219,24 @@ modded class SCR_CampaignBuildingManagerComponent
 	
 	// ---------------------------------------------------------------------------------------
 	// --> Server
+	
+	void RemovePlacedFOBs(vector center, float radius)
+	{
+		FobQueryCallbackClass callback = new FobQueryCallbackClass();
+		GetGame().GetWorld().QueryEntitiesBySphere(center, radius, callback.Callback, null);
+	
+		foreach (IEntity ent : callback.m_Entities)
+		{
+			if (!ent)
+				continue;
+	
+			if (!FOB_Helper.IsFOB(ent.GetPrefabData().GetPrefabName()))
+				continue;
+	
+			SCR_EntityHelper.DeleteEntityAndChildren(ent);
+			PrintFormat("[SCR_CampaignBuildingManagerComponent :: RemovePlacedFOBs] Deleting placed FOB prefab: %1", ent.GetPrefabData().GetPrefabName());
+		}
+	}
 	
 	void RemoveAIGroupsFromFOB(IEntity newFob)
 	{
@@ -155,7 +255,7 @@ modded class SCR_CampaignBuildingManagerComponent
 	}
 	
 	// ---------------------------------------------------------------------------------------
-	// --> Server
+	// --> Client
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
 	void RpcUpdateRadioCoverage()
@@ -234,5 +334,38 @@ modded class SCR_CampaignBuildingManagerComponent
 		}
 	
 		return nearestPos;
+	}
+	
+
+	
+	// ---------------------------------------------------------------------------------------
+	// --> Debug
+	
+	void DebugNearbyEntities(vector pos, float radius)
+	{
+		FobQueryCallbackClass callback = new FobQueryCallbackClass();
+		GetGame().GetWorld().QueryEntitiesBySphere(pos, radius, callback.Callback, null);
+	
+		PrintFormat("[DebugNearbyEntities] Found %1 entities within %2 meters of %3", callback.m_Entities.Count(), radius, pos);
+	
+		foreach (IEntity ent : callback.m_Entities)
+		{
+			if (!ent)
+				continue;
+			
+			string prefabName = ent.GetPrefabData().GetPrefabName();
+			PrintFormat("[DebugNearbyEntities] Entity: %1 at %2", prefabName, ent.GetOrigin());
+		}
+	}
+}
+
+class FobQueryCallbackClass : Managed
+{
+	ref array<IEntity> m_Entities = new array<IEntity>();
+
+	bool Callback(IEntity ent)
+	{
+		m_Entities.Insert(ent);
+		return true; // true = keep scanning
 	}
 }

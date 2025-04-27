@@ -14,5 +14,12 @@ GenericEntity : "{7CB2EB208F93C6D4}PrefabsEditable/Auto/Compositions/Slotted/Slo
     }
    }
   }
+  SCR_EditorLinkComponent "{620EE6CE6913E7F5}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{620EE6CE69ED9BD5}" {
+     m_Prefab "{589BD73910A33432}PrefabsEditable/Auto/Compositions/Misc/SubCompositions/Tents/CommandPost_FIA_Modded.et"
+    }
+   }
+  }
  }
 }

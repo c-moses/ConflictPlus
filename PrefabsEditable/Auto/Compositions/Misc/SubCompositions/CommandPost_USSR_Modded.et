@@ -1,0 +1,12 @@
+GenericEntity : "{77FE89E3B2B9C193}PrefabsEditable/Auto/Compositions/Misc/SubCompositions/E_Tent_CommandPost_USSR_01.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  SCR_EditorLinkComponent "{620EE6CE7E6E2349}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{620EE6CE7E424B2F}" {
+     m_Prefab "{B660BC1A5ED99CFE}PrefabsEditable/Auto/Compositions/Misc/SubCompositions/E_Table_Desk_USSR_01.et"
+    }
+   }
+  }
+ }
+}
